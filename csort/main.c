@@ -24,9 +24,10 @@ int main(int argc, char* argv[]) {
     if (!list) {
       list = createList(line);
     } else {
-      list = addToList(list, line);
+      list = addToNewList(list, line);
     }
   }
+
   fclose(fstream);
 
   printList(list);
