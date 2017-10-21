@@ -8,9 +8,9 @@
 
 node_t* createList(char* s_val) {
 
-  node_t* tail = (node_t*) malloc(sizeof(node_t*));
+  node_t* tail = malloc(sizeof(node_t*));
 
-  tail->s_val = (char*) malloc(sizeof(s_val));
+  tail->s_val = malloc(sizeof(s_val));
   strcpy(tail->s_val, s_val);
 
   tail->next = NULL;
@@ -20,7 +20,7 @@ node_t* createList(char* s_val) {
 
 node_t* addToNewList(node_t* self, char* s_val) {
 
-  node_t* node = (node_t*) malloc(sizeof(node_t*));
+  node_t* node = malloc(sizeof(node_t*));
   
   node->s_val = (char*) malloc(sizeof(s_val));
   strcpy(node->s_val, s_val);
@@ -31,7 +31,7 @@ node_t* addToNewList(node_t* self, char* s_val) {
   while(cursor) {
     if (cursor->next) {
       if (strcmp(cursor->s_val, cursor->next->s_val) > 0) {
-        char* temp = (char*) malloc(sizeof(cursor->s_val));
+        char* temp = malloc(sizeof(cursor->s_val));
         strcpy(temp, cursor->s_val);
         strcpy(cursor->s_val, cursor->next->s_val);
         strcpy(cursor->next->s_val, temp);
