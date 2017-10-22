@@ -8,6 +8,8 @@
 
 #define MAX_PATHNAME_LENGTH 4096
 
+char* getFilepath(char* filename, char* projectpath);
+
 int main (int argc, char* argv[]) {
 
   if (argc != 2) {
@@ -32,15 +34,28 @@ int main (int argc, char* argv[]) {
     printf("File or directory already exists\nPlease choose another name or run gen in a different directory\n"); 
     return 1;
   }
-  
-  strcat(fullProjectPath, "/");
 
-  char* mainName = malloc(sizeof(char) * MAX_PATHNAME_LENGTH);
-  strcpy(mainName, fullProjectPath);
-  strcat(mainName, "main.c");
-  FILE* mainc = fopen(mainName, "w");
+  FILE* mainc = fopen(getFilepath("main.c", fullProjectPath), "w");
   fprintf(mainc, MAINCSTR);
   fclose(mainc);
+  
+  FILE* makefile = fopen(getFilepath("Makefile", fullProjectPath), "w");
+  fprintf(makefile, MAKESTR1);
+  fprintf(makefile, projectName);
+  fprintf(makefile, MAKESTR2);
+  fclose(makefile);
+
+  FILE* readme = fopen(getFilepath("README.md", fullProjectPath), "w");
+  fprintf(readme, READMESTR);
+  fclose(readme);
 
   return 0;  
+}
+
+char* getFilepath(char* filename, char* fullProjectPath) {
+  char* filepath = malloc(sizeof(char) * MAX_PATHNAME_LENGTH);
+  strcpy(filepath, fullProjectPath);
+  strcat(filepath, "/");
+  strcat(filepath, filename);
+  return filepath;
 }
