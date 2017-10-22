@@ -10,7 +10,7 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 $(TARGET_DIR)/$(TARGET): $(OBJS)
 	$(CC) $(OBJS) -o $@ 
 $(BUILD_DIR)/%.c.o: %.c
-	$(MKDIR_P) $(dir $@)
+	$(MKDIR_P) $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean
